@@ -26,10 +26,18 @@ public class  PaymentRequestController {
         return ResponseEntity.status(HttpStatus.CREATED).body(requestService.create(paymentRequestDTO));
     }
 
+
+// List all payment requests, optionally filtered by status.
+//  Example: {@code GET /payment-requests?status=PENDING}
+
     @GetMapping
     public List<PaymentRequest> getAll(@RequestParam(required = false) PaymentStatus status) {
         return requestService.findAll(status);
     }
+
+
+//     * Fetch a single payment request by id.
+//     * @throws Exception if no request with that id exists (→ 404)
 
     @GetMapping("/{id}")
     public PaymentRequest getOne(@PathVariable Long id) {
