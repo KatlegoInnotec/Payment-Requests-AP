@@ -3,6 +3,7 @@ package com.example.payment_requests_demo.controller;
 
 import com.example.payment_requests_demo.dto.CreatePaymentRequestDTO;
 import com.example.payment_requests_demo.dto.RejectRequestDTO;
+import com.example.payment_requests_demo.dto.UpdateStatusDTO;
 import com.example.payment_requests_demo.enums.PaymentStatus;
 import com.example.payment_requests_demo.model.PaymentRequest;
 import com.example.payment_requests_demo.service.PaymentRequestService;
@@ -52,5 +53,11 @@ public class  PaymentRequestController {
     @PostMapping("/{id}/reject")
     public PaymentRequest reject(@PathVariable Long id, @Valid @RequestBody RejectRequestDTO dto) {
         return requestService.reject(id, dto.getRejectionReason());
+    }
+
+    @PatchMapping("/{id}/status")
+    public PaymentRequest updateStatus(@PathVariable Long id,
+                                       @Valid @RequestBody UpdateStatusDTO dto) {
+        return requestService.updateStatus(id, dto);
     }
 }

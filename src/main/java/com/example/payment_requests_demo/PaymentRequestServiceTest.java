@@ -26,7 +26,7 @@ class PaymentRequestServiceTest {
         return dto;
     }
 
-    // ✅ Test 1 — happy path: create sets status PENDING and createdAt
+    //  Test 1 — happy path: create sets status PENDING and createdAt
     @Test
     void create_shouldSetStatusPendingAndTimestamp() {
         PaymentRequest created = service.create(sampleDto());
@@ -37,7 +37,7 @@ class PaymentRequestServiceTest {
         assertNull(created.getRejectionReason());
     }
 
-    // ✅ Test 2 — CRITICAL: approving twice must fail
+    //  Test 2 — CRITICAL: approving twice must fail
     @Test
     void approve_shouldFailWhenRequestIsNotPending() {
         PaymentRequest created = service.create(sampleDto());
@@ -51,7 +51,7 @@ class PaymentRequestServiceTest {
         assertTrue(ex.getMessage().contains("PENDING"));
     }
 
-    // ✅ Test 3 — rejecting requires status PENDING and sets reason
+    //  Test 3 — rejecting requires status PENDING and sets reason
     @Test
     void reject_shouldSetStatusAndReason_whenPending() {
         PaymentRequest created = service.create(sampleDto());
@@ -61,7 +61,7 @@ class PaymentRequestServiceTest {
         assertEquals("Duplicate invoice", rejected.getRejectionReason());
     }
 
-    // ✅ Bonus — fetch a missing request → ResourceNotFoundException
+
     @Test
     void findOne_shouldThrowWhenNotFound() {
         assertThrows(ResourceNotFoundException.class, () -> service.findOne(99999L));

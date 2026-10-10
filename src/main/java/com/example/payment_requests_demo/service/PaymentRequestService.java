@@ -1,6 +1,7 @@
 package com.example.payment_requests_demo.service;
 
 import com.example.payment_requests_demo.dto.CreatePaymentRequestDTO;
+import com.example.payment_requests_demo.dto.UpdateStatusDTO;
 import com.example.payment_requests_demo.enums.PaymentStatus;
 import com.example.payment_requests_demo.exception.InvalidStateException;
 import com.example.payment_requests_demo.exception.ResourceNotFoundException;
@@ -67,6 +68,21 @@ public class PaymentRequestService {
         requirePending(request, "rejected");
         request.setStatus(PaymentStatus.REJECTED);
         request.setRejectionReason(reason);
+        return repository.save(request);
+    }
+
+    public PaymentRequest updateStatus(Long id, UpdateStatusDTO statusDTO) {
+        PaymentRequest request = findOne(id);
+        requirePending(request, "changed");
+
+        if(statusDTO.getStatus() == PaymentStatus.REJECTED) {
+            if (statusDTO.getRejectionReason() == null || statusDTO.getRejectionReason().isBlank())
+                throw new InvalidStateException("rejectionReason is required when rejecting");
+            request.setRejectionReason(statusDTO.getRejectionReason());
+        }else {
+            request.setRejectionReason(null);
+        }
+        request.setStatus(statusDTO.getStatus());
         return repository.save(request);
     }
 
