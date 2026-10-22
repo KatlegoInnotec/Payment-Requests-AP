@@ -2,12 +2,14 @@ package com.example.payment_requests_demo.model;
 
 import com.example.payment_requests_demo.enums.PaymentStatus;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.Instant;
-import java.util.Date;
+
 
 @Entity
 @Table(name = "payment_request")
+@Data
 public class PaymentRequest {
 
     @Id
@@ -44,35 +46,4 @@ public class PaymentRequest {
         this.rejectionReason = rejectionReason;
     }
 
-    public PaymentStatus getStatus() {return status;}
-
-    public void setStatus(PaymentStatus status) {this.status = status;}
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getRejectionReason() { return rejectionReason;}
-
-    public void setRejectionReason(String rejectionReason) {this.rejectionReason = rejectionReason;}
-
-    public Long getId() {return id;}
-
-    public void setId(Long id) {this.id = id;}
-
-    public String getRequesterName() {return requesterName;}
-
-    public void setRequesterName(String requesterName) {this.requesterName = requesterName;}
-
-    public Double getAmount() {return amount;}
-
-    public void setAmount(Double amount) {this.amount = amount;}
-
-    public String getDescription() {return description;}
-
-    public void setDescription(String description) {this.description = description;}
 }

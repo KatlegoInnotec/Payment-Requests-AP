@@ -7,6 +7,7 @@ import com.example.payment_requests_demo.exception.InvalidStateException;
 import com.example.payment_requests_demo.exception.ResourceNotFoundException;
 import com.example.payment_requests_demo.model.PaymentRequest;
 import com.example.payment_requests_demo.repository.PaymentRequestRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Service
 public class PaymentRequestService {
+
 
     private PaymentRequestRepository repository;
 
@@ -57,8 +59,9 @@ public class PaymentRequestService {
     private void requirePending(PaymentRequest request, String action) {
         if (request.getStatus() != PaymentStatus.PENDING) {
             throw new InvalidStateException(
-                    "Only PENDING requests can be " + action +
-                            ". This request is already " + request.getStatus()
+                    "This request cannot be " + action +
+                            " because it is already " + request.getStatus() +
+                            ". Only PENDING requests can be changed."
             );
         }
     }
