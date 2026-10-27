@@ -8,6 +8,7 @@ import com.example.payment_requests_demo.enums.PaymentStatus;
 import com.example.payment_requests_demo.model.PaymentRequest;
 import com.example.payment_requests_demo.service.PaymentRequestService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,8 @@ import java.util.List;
 public class  PaymentRequestController {
 
 
+
+    @Autowired
     private final PaymentRequestService requestService;
 
     public PaymentRequestController(PaymentRequestService requestService) {this.requestService = requestService;}

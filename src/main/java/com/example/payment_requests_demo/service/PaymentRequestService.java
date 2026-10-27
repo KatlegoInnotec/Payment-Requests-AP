@@ -18,11 +18,9 @@ import java.util.List;
 public class PaymentRequestService {
 
 
+    @Autowired
     private PaymentRequestRepository repository;
 
-    public PaymentRequestService(PaymentRequestRepository repository) {
-        this.repository = repository;
-    }
 
     public PaymentRequest create(CreatePaymentRequestDTO requestDTO){
         PaymentRequest paymentRequest = new PaymentRequest();
